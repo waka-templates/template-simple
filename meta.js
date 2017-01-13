@@ -27,7 +27,8 @@ module.exports = {
         "suit":{
             "type": "checkbox",
             "message":"select suit?",
-            "default": ["vuex","vue-router","vue-resource"]
+            "default": ["vuex","vue-router","vue-resource"],
+            "choices": ["vuex","vue-router","vue-resource"]
         },
         "unit": {
             "type": "confirm",

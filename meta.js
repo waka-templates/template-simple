@@ -42,7 +42,7 @@ module.exports = {
             },{
                 "name": "vue-router",
                 "value": {
-                    "name": "vue-resource",
+                    "name": "vue-router",
                     "version": "^1.0.3"
                 }
             }]

@@ -9,7 +9,7 @@
   "dependencies": {
     "vue": "^2.0.0",
     {{#each suit}}
-    {{this.name}}:{{this.version}}
+    "{{this.name}}":"{{this.version}}"
     {{/each}}
   },
   "devDependencies": {

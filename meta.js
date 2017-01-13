@@ -11,7 +11,8 @@ module.exports = {
         },
         "version": {
            "type": "input",
-            "message": "project's version"
+            "message": "project's version",
+            "default": "1.0.0"
         },
         "description": {
             "type"    : "string",
@@ -22,6 +23,11 @@ module.exports = {
         "author"     : {
             "type"   : "string",
             "message": "Author"
+        },
+        "suit":{
+            "type": "checkbox",
+            "message":"select suit?",
+            "default": ["vuex","vue-router","vue-resource"]
         },
         "unit": {
             "type": "confirm",
@@ -47,18 +53,13 @@ module.exports = {
             "type": "confirm",
             "message": "Use ESLint to lint your code?"
         },
-        "webpack":{
+        "webpack2":{
             "type": "confirm",
             "message": "Use webpack 2?"
-        },
-        "suit":{
-            "type": "checkbox",
-            "message":"select suit?",
-            "default": ["vuex","vue-router","vue-resource"]
         }
     },
     "filters":{
-        "test/*": "test"
+        "test/*": "unit"
     },
     "completeMessage": "To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev\n\nDocumentation can be found at https://github.com/waka-templates/template-simple"
 }

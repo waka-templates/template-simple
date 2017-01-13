@@ -27,28 +27,24 @@ module.exports = {
         "suit":{
             "type": "checkbox",
             "message":"select suit?",
-            "default": [{
-                "name": "vuex",
-                "version": "^2.0.0"
-            },{
-                "name": "vue-resource",
-                "version": "^2.0.0"
-            },{
-                "name": "vue-router",
-                "version": "^1.0.3"
-            }],
             "choices": [{
                 "name": "vuex",
-                "value": "^2.0.0",
-                "version": "^2.0.0"
+                "value": {
+                    "name": "vuex",
+                    "version": "^2.0.0"
+                }
             },{
                 "name": "vue-resource",
-                "version": "^2.0.0",
-                "value":"^2.0.0"
+                "value": {
+                    "name": "vue-resource",
+                    "version": "^2.0.0"
+                }
             },{
                 "name": "vue-router",
-                "version": "^1.0.3",
-                "value":"^1.0.3"
+                "value": {
+                    "name": "vue-resource",
+                    "version": "^1.0.3"
+                }
             }]
         },
         "unit": {

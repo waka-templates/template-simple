@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "vue": "^2.0.0",
-    {{#each suit as |name version}}
+    {{#each suit as |name version|}}
     {{name}}:{{version}}
     {{/each}}
   },

@@ -53,45 +53,25 @@ A prompt can be made conditional by adding a `when` field, which should be a Jav
 
 The prompt for `eslint` will only be triggered when the user answered yes to the `lint` prompt.
 
-### Pre-registered Handlebars Helpers
-
-Two commonly used Handlebars helpers, `if_eq` and `unless_eq` are pre-registered:
-
-```
-{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-```
-
-### Custom Handlebars Helpers
-
-You may want to register additional Handlebars helpers using the `helpers` property in the metadata file. The object key is the helper name:
-
-```
-module.exports = {
-  helpers: {
-    lowercase: str => str.toLowerCase()
-  }
-}
-```
-
-Upon registration, they can be used as follows:
-
-```
-{{ lowercase name }}
-```
-
 ### File filters
 
 The `filters` field in the metadata file should be an object hash containing file filtering rules. For each entry, the key is a [minimatch glob pattern](https://github.com/isaacs/minimatch) and the value is a JavaScript expression evaluated in the context of prompt answers data. Example:
 
 ```
 {
+  "prompts": {
+      "unit": {
+          "type": "confirm",
+          "message": "Setup unit tests with Mocha?"
+      }
+  },  
   "filters": {
-    "test/*": "needUnitTest"
+    "test/*": "unit"
   }
 }
 ```
 
-Files under `test` will only be generated if the user answered yes to the prompt for `needUnitTest`.
+Files under `test` will only be generated if the user answered yes to the prompt for `unit`.
 
 Note that the `dot` option for minimatch is set to `true` so glob patterns would also match dotfiles by default.
 
@@ -105,11 +85,12 @@ Note that the `dot` option for minimatch is set to `true` so glob patterns would
 }
 ```
 
-* `inPlace` - generating template into current directory
+* `isCwd` - generating template into current directory
 
 ```
 {
-  "completeMessage": "{{#inPlace}}To get started:\n\n  npm install\n  npm run dev.{{else}}To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev.{{/inPlace}}"
+  "completeMessage": "{{#isCwd}}To get started:\n\n  npm install\n  npm run dev.{{else}}To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev.{{/isCwd}}"
 }
 ```
 
+#### [README 中文版](https://github.com/waka-templates/template-simple/blob/master/README_zh.md)

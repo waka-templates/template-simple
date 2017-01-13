@@ -38,11 +38,14 @@ module.exports = {
                 "version": "^1.0.3"
             }],
             "choices": [{
-                "name": "vuex"
+                "name": "vuex",
+                "version": "^2.0.0"
             },{
-                "name": "vue-resource"
-            }, {
-                "name": "vue-router"
+                "name": "vue-resource",
+                "version": "^2.0.0"
+            },{
+                "name": "vue-router",
+                "version": "^1.0.3"
             }]
         },
         "unit": {

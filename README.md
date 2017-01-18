@@ -1,17 +1,19 @@
+#### [README for English](https://github.com/waka-templates/template-simple/blob/master/README_en.md)
+
 ## template-simple
 A template simple to show how to write a custom template by yourself.
 
-## Writing Custom Templates from Scratch
+## 自定义模板的规范说明
 
-* A template repo **must** have a template directory that holds the template files.
-* A template repo **may** have a metadata file for the template which can be either a meta.js or meta.json file. It can contain the following fields:
-    * `prompts`: used to collect user options data
-    * `filters`: used to conditional filter files to render
-    * `completeMessage`: the message to be displayed to the user when the template has been generated. You can include custom instruction here
+* 模板的仓库下必须有 `template` 目录，在该目录下定义你的模板文件
+* 模板仓库的根目录下必须有 `meta.js` 或 `meta.json` 文件，该文件必须导出为一个对象，对象可定义以下字段:
+    * `prompts`: 收集用户自定义数据
+    * `filters`: 根据条件过滤文件
+    * `completeMessage`: 脚手架渲染完成后给予的提示信息
 
 ### prompts
 
-The `prompts` field in the metadata file should be an object hash containing prompts for the user. For each entry, the key is the variable name and the value is an [Inquirer.js question object](https://github.com/SBoudrias/Inquirer.js/#question). Example:
+`prompts` 是一个哈希对象, 定义规范可以参考[Inquirer.js question object](https://github.com/SBoudrias/Inquirer.js/#question). 示例如下:
 
 ```
 {
@@ -24,11 +26,11 @@ The `prompts` field in the metadata file should be an object hash containing pro
 }
 ```
 
-After all prompts are finished, all files inside `template` will be rendered using [Handlebars](http://handlebarsjs.com/), with the prompt results as the data.
+所有的用户输入完成之后, `template` 目录下的所有文件将会用 [Handlebars](http://handlebarsjs.com/) 进行渲染. 用户输入的数据会作为模板渲染时的使用数据.
 
-### Conditional Prompts
+### 带条件的 prompts
 
-A prompt can be made conditional by adding a `when` field, which should be a JavaScript expression evaluated with data collected from previous prompts. For example:
+`prompt` 可以添加一个 `when` 字段，该字段表示此 `prompt` 会根据 `when` 的值来判断是否出现在终端提示用户进行输入. 可参考[Inquirer.js question object](https://github.com/SBoudrias/Inquirer.js/#question). 示例:
 
 ```
 {
@@ -51,11 +53,11 @@ A prompt can be made conditional by adding a `when` field, which should be a Jav
 }
 ```
 
-The prompt for `eslint` will only be triggered when the user answered yes to the `lint` prompt.
+在上述示例中, 只有用户在 `lint` 中的回答值是 `yes` 时, `eslint` 才会被触发, 在终端显示让用户选择 `eslint` 的配置规范.
 
-### File filters
+### 文件过滤
 
-The `filters` field in the metadata file should be an object hash containing file filtering rules. For each entry, the key is a [minimatch glob pattern](https://github.com/isaacs/minimatch) and the value is a JavaScript expression evaluated in the context of prompt answers data. Example:
+`filters` 字段是一个包含文件过滤规则的哈希对象, 键用于定义符合 [minimatch glob pattern](https://github.com/isaacs/minimatch) 规则的过滤器, 键值是 `prompts` 中用户的输入值. 例如:
 
 ```
 {
@@ -71,13 +73,15 @@ The `filters` field in the metadata file should be an object hash containing fil
 }
 ```
 
-Files under `test` will only be generated if the user answered yes to the prompt for `unit`.
+在上述示例中, `template` 目录下 `test` 目录只有用户在 `unit` 中的回答值是 `yes` 时才会生成. 
 
-Note that the `dot` option for minimatch is set to `true` so glob patterns would also match dotfiles by default.
+如果要匹配以 `.` 开头的文件, 则需要将 minimatch 的 `dot` 选项设置成 `true`.
 
-### Additional data available in meta.{js,json}
+### 其它配置
 
-* `destDirName` - destination directory name
+在 `meta.{js,json}` 文件中, 有一些可选的选项配置:
+
+* `destDirName` - 项目的目录名字
 
 ```
 {
@@ -85,12 +89,10 @@ Note that the `dot` option for minimatch is set to `true` so glob patterns would
 }
 ```
 
-* `isCwd` - generating template into current directory
+* `isCwd` - 项目是否在当前目录下被渲染
 
 ```
 {
   "completeMessage": "{{#isCwd}}To get started:\n\n  npm install\n  npm run dev.{{else}}To get started:\n\n  cd {{destDirName}}\n  npm install\n  npm run dev.{{/isCwd}}"
 }
 ```
-
-#### [README 中文版](https://github.com/waka-templates/template-simple/blob/master/README_zh.md)
